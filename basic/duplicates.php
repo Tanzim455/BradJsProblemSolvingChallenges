@@ -1,7 +1,7 @@
 <?php 
 
-$nums=[10,20,30,40,10,40];
-$uniqueArray=[];
+ $nums=[10,20,30,40,10,40];
+ $uniqueArray=[];
 
 for($i=0;$i<count($nums);$i++){
     if(!in_array(needle:$nums[$i],haystack:$uniqueArray)){
