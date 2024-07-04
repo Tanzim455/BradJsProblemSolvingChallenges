@@ -1,8 +1,3 @@
-let word = 'what time are we climbing up the volcano';
-let split_words = word.split(' ');
-
-console.log(split_words);
-
 let allValues = {
     a: 1,
     b: 2,
@@ -30,90 +25,65 @@ let allValues = {
     x: 24,
     y: 25,
     z: 26
-  };
-  
-  console.log(allValues);
-  
+};
+//27,9,28,1,54,48
+// Original names as a string
+let str = 'what time are we climbing up the volcano';
 
-let obj = {};
+// Split the string into individual names
+let split = str.split(" ");
+console.log(split);
 
-// Create obj with keys from split_words
-for (let i = 0; i < split_words.length; i++) {
-    obj[split_words[i]] = '';
+ let nameArr = [];
+for (let i = 0; i < split.length; i++) {
+    let tempArrName = [];
+    let charSplit = split[i].split("");
+    tempArrName.push(charSplit);
+    nameArr.push(tempArrName);
 }
 
-console.log(obj);
+// // Flatten the array
+ let namesTwo = nameArr.flat();
+ console.log(namesTwo);
 
-// Get keys of obj
-let arrayKeys = Object.keys(obj);
-let splitKeys = [];
-let filteredObjNums = {};
-
-// Loop through each key in arrayKeys
-arrayKeys.forEach(a => {
-    // Split the key into an array of characters
-    let allSplit = a.split("");
-    // Add the array of characters to splitKeys
-    splitKeys.push(allSplit);
-
-    // Filter allValues to include only those key-value pairs where the key is included in allSplit
-    
-});
-
-console.log(splitKeys[0]);
-
-let filters=[];
-
-for(i=0;i<splitKeys.length;i++){
-    filters.push(Object.entries(allValues).filter(([key, value]) => splitKeys[i].includes(key)));
-}
- 
-
-filters.forEach((subArray, index) => {
-    let sum = 0;
-    subArray.forEach(item => {
-        if (typeof item[1] === 'number') {
-            sum += item[1];
+let newArr = [];
+let tempArr=[];
+// Loop through namesTwo to convert each character to its corresponding value
+ for (let i = 0; i < namesTwo.length; i++) {
+      let tempArr = [];
+     for (let j = 0; j < namesTwo[i].length; j++) {
+        let char = namesTwo[i][j].toLowerCase(); // Convert to lowercase to match keys in allValues
+        if (allValues[char] !== undefined) {
+            tempArr.push(allValues[char]);
         }
+     }
+     newArr.push(tempArr);
+}
+
+console.log(newArr); 
+// Output the newArr
+
+let numsArr = [];
+for (let i = 0; i < newArr.length; i++) {
+    let sum = 0;
+    newArr[i].forEach(n => {
+        sum += n;
     });
-    filteredObjNums[`array${index + 1}`] = sum;
-});
-
-console.log(filteredObjNums);
- let objNumValues=Object.values(filteredObjNums);
-
- console.log(objNumValues);
-// console.log(obj);
-let objNumKeys=Object.keys(obj);
-objNumKeys.forEach((element, index) => {
-    obj[element] = objNumValues[index];
-});
-console.log(obj);
-
-let ValuesOfFilteredObj=Object.values(obj);
-
-let MaxNum=Math.max(...ValuesOfFilteredObj);
-
-console.log(MaxNum);
-
-let filteredString=Object.entries(obj).filter(([key, value]) =>value===MaxNum);
-
-console.log(filteredString);
-
-if(filteredString.length===1){
-    console.log(filteredString[0][0]);
-}
-let flatten_string=filteredString.flat();
-
-for (let i = 0; i < flatten_string.length; i++) {
-    if (typeof flatten_string[i] !== 'number') {
-        console.log(flatten_string[i]);
-    }
+    numsArr.push(sum);
 }
 
+console.log(numsArr); 
+// Output the numsArr with sums of each sub-array
 
+let maxNum = Math.max(...numsArr);
 
-// console.log(filtredString.length);
+// Output the highest sum
 
-// console.log(filtredString.flat());
+// Index of the highest number
+ let indexOfHighestNumber = numsArr.findIndex(n => n === maxNum);
+
+// Name with the highest index
+ console.log(indexOfHighestNumber); 
+// Output the string with highest value
+ console.log(namesTwo[indexOfHighestNumber].join("")); 
 
